@@ -1,2 +1,2 @@
 # TAC
-This repository presents a TAC project **2021/1**
+this repository represents a project of the discipline TAC UNB **2021/1**
