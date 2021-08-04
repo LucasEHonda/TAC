@@ -3,7 +3,6 @@
 
 #include <SDL2/SDL.h>
 #include <string>
-
 class Game{
     private:
         Game(std::string title, int width, int height);
@@ -18,12 +17,5 @@ class Game{
         // State& GetState();
         static Game& GetInstance();
 };
-
-Game::Game(std::string title, int width, int height){
-}
-
-Game::~Game()
-{
-}
 
 #endif
