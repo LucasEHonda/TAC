@@ -1,8 +1,11 @@
 #include "State.h"
 
-State::State(){
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
+
+State::State()//:bg()
+{
     State::quitRequested = false;
-    State::bg = new Sprite();
 }
 
 void State::LoadAssets(){
@@ -11,7 +14,7 @@ void State::LoadAssets(){
 
 void State::Update(float dt){
     if (SDL_QuitRequested()){
-        State::quitRequested = true;
+        quitRequested = true;
     }
 }
 
@@ -19,6 +22,4 @@ void State::Render(){
     
 }
 
-bool QuitRequested(){
-    
-}
+bool State::QuitRequested(){return quitRequested;}

@@ -1,10 +1,10 @@
 #ifndef STATE_H_
 #define STATE_H_
 
-class Game{
+class State{
     private:
-        Sprite bg;
-        Music music;
+        // Sprite bg;
+        // Music music;
         bool quitRequested;
     public:
         State();

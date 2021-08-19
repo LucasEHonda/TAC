@@ -8,6 +8,8 @@ Game* Game::instance = nullptr;
 
 Game::Game(std::string title, int width, int height){
     
+    
+    state = new State();
     this->instance = instance;
     // inicializar sdl
     if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_TIMER) < 0){
@@ -67,14 +69,19 @@ Game& Game::GetInstance(){
     return *instance;
 }
 
-// Game& Game::GetState(){
-//     return *state;    
-// }
+State& Game::GetState(){
+    return *state;    
+}
 
 SDL_Renderer* Game::GetRenderer(){
     return Game::renderer;
 }
 
-void Run(){
-    
+void Game::Run(){
+    while(!GetState().QuitRequested()){
+        GetState().Update(10);
+        GetState().Render();
+        SDL_RenderPresent(renderer);
+        SDL_Delay(33);
+    }
 }
