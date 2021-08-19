@@ -67,6 +67,14 @@ Game& Game::GetInstance(){
     return *instance;
 }
 
-Game& Game::GetInstance(){
+// Game& Game::GetState(){
+//     return *state;    
+// }
+
+SDL_Renderer* Game::GetRenderer(){
+    return Game::renderer;
+}
+
+void Run(){
     
 }

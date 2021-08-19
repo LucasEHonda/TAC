@@ -1,6 +1,7 @@
 #ifndef GAME_H_
 #define GAME_H_
 
+#include "State.h"
 #include <SDL2/SDL.h>
 #include <string>
 class Game{
@@ -9,7 +10,7 @@ class Game{
         static Game* instance;
         SDL_Window* window;
         SDL_Renderer* renderer;
-        // State* state;
+        State* state;
     public:
         ~Game();
         void Run();
