@@ -7,35 +7,24 @@
 Game* Game::instance = nullptr;
 
 Game::Game(std::string title, int width, int height){
-    
-    
-    state = new State();
-    this->instance = instance;
+    if(instance == nullptr){
+        instance = this;    
+    }else{
+        exit(EXIT_FAILURE);
+    }
+
     // inicializar sdl
     if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_TIMER) < 0){
         std::cout << "SDL_Init failed: " << SDL_GetError() << std::endl;
         exit(1);
     }
-    
+
     // inicializar sdl image
     int imgInit = IMG_INIT_JPG | IMG_INIT_PNG | IMG_INIT_TIF;
     if (IMG_Init(imgInit) != imgInit){
         std::cout << "IMG_Init failed: " << IMG_GetError() << std::endl;
         exit(1);
     }
-    
-    // inicializar sdl mix
-    int mixInit = MIX_INIT_OGG|MIX_INIT_MOD;
-    if(Mix_Init(mixInit) != mixInit){
-        std::cout << "Mix_Init: "  <<  Mix_GetError() << std::endl;
-    }
-    
-    if(Mix_OpenAudio(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, MIX_DEFAULT_CHANNELS, 1024) == -1){
-        std::cout << "Mix_OpenAudio: " << Mix_GetError() << std::endl;
-        exit(1);
-    }
-    
-    Mix_AllocateChannels(32);
 
     // inicializar Window
     window = SDL_CreateWindow("Lucas Honda 180105281", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, 0);
@@ -50,13 +39,27 @@ Game::Game(std::string title, int width, int height){
         std::cout << "SDL_CreateRenderer failed: " << SDL_GetError() << std::endl;
         exit(1);        
     }
+    
+    // inicializar sdl mix
+    int mixInit = MIX_INIT_OGG|MIX_INIT_MOD;
+    if(Mix_Init(mixInit) != mixInit){
+        std::cout << "Mix_Init: "  <<  Mix_GetError() << std::endl;
+    }
+    
+    if(Mix_OpenAudio(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, MIX_DEFAULT_CHANNELS, 1024) == -1){
+        std::cout << "Mix_OpenAudio: " << Mix_GetError() << std::endl;
+        exit(1);
+    }
+    
+    Mix_AllocateChannels(32);
+    state = new State();
 }
 
 Game::~Game(){
-    SDL_DestroyRenderer(renderer);
-    SDL_DestroyWindow(window);
     Mix_CloseAudio();
     Mix_Quit();
+    SDL_DestroyRenderer(renderer);
+    SDL_DestroyWindow(window);
     IMG_Quit();
     SDL_Quit();
 }
@@ -74,7 +77,7 @@ State& Game::GetState(){
 }
 
 SDL_Renderer* Game::GetRenderer(){
-    return Game::renderer;
+    return renderer;
 }
 
 void Game::Run(){

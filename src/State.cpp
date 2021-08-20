@@ -3,7 +3,7 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 
-State::State()//:bg()
+State::State():bg("assets/img/ocean.jpg")
 {
     State::quitRequested = false;
 }
@@ -19,7 +19,7 @@ void State::Update(float dt){
 }
 
 void State::Render(){
-    
+    bg.Render(0, 0);
 }
 
 bool State::QuitRequested(){return quitRequested;}
