@@ -41,8 +41,8 @@ Game::Game(std::string title, int width, int height){
     }
     
     // inicializar sdl mix
-    int mixInit = MIX_INIT_OGG|MIX_INIT_MOD;
-    if(Mix_Init(mixInit) != mixInit){
+    int mixInit = MIX_INIT_OGG;
+    if((Mix_Init(mixInit)&mixInit) != mixInit){
         std::cout << "Mix_Init: "  <<  Mix_GetError() << std::endl;
     }
     
