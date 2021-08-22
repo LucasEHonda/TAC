@@ -3,7 +3,7 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 
-State::State():bg("assets/img/ocean.jpg")
+State::State():bg("assets/img/ocean.jpg"), music("assets/audio/stageState.ogg")
 {
     State::quitRequested = false;
 }
